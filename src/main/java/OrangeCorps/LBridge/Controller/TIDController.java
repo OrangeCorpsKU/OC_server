@@ -20,7 +20,7 @@ public class TIDController {
     private TIDService tidService;
 
     // TID 질문 불러오기
-    @GetMapping
+    @GetMapping("/test")
     public ResponseEntity<TIDQuestion> getQuestions() {
         List<TIDQuestion> questions = tidService.getAllQuestions();
 
