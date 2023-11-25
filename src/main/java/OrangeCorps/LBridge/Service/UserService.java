@@ -1,19 +1,21 @@
 package OrangeCorps.LBridge.Service;
 
-import OrangeCorps.LBridge.Entity.User;
-import OrangeCorps.LBridge.Repository.UserRepository;
-import OrangeCorps.LBridge.Validator.UserValidator;
+import OrangeCorps.LBridge.Domain.User.User;
+import OrangeCorps.LBridge.Domain.User.UserRepository;
+import OrangeCorps.LBridge.Service.Validator.UserValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import static OrangeCorps.LBridge.Config.*;
+import static OrangeCorps.LBridge.Config.Config.*;
 
 @Service
+@Slf4j
 public class UserService {
     @Autowired
     UserRepository userRepository;
@@ -23,10 +25,9 @@ public class UserService {
     public ResponseEntity<String> linkCouple(String userId, String coupleId) {
 
         List<User> users = findBothUser(userId, coupleId);
-        boolean isBothExisted = userValidator.validateUserListLength(users,PAIR_OF_COUPLE);
 
-        if(!isBothExisted)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND_COUPLE_USER);
+        if(userValidator.validateUserListLength(users,PAIR_OF_COUPLE))
+            throw new NullPointerException(NOT_FOUND_USER);
 
         registCouple(userId,coupleId);
         return ResponseEntity.ok(COUPLE_LINK_SUCCESS);
@@ -34,16 +35,23 @@ public class UserService {
 
     public List<User> findBothUser(String userId, String coupleId) {
         List<User> users = new ArrayList<>();
-        User userById = userRepository.findById(userId).orElse(null);
-        User userByCoupleId = userRepository.findByUserId(coupleId);
+        Optional<User> userById = userRepository.findById(userId);
+        Optional<User> userByCoupleId = userRepository.findByUserId(coupleId);
 
-        if (userById != null) {
-            users.add(userById);
+        if(userById.isPresent()){
+            users.add(userById.get());
+        }
+        else{
+            throw new NullPointerException(NOT_FOUND_USER);
         }
 
-        if (userByCoupleId != null) {
-            users.add(userByCoupleId);
+        if(userByCoupleId.isPresent()){
+            users.add(userByCoupleId.get());
         }
+        else{
+            throw new NullPointerException(NOT_FOUND_COUPLE_USER);
+        }
+
         return users;
     }
 

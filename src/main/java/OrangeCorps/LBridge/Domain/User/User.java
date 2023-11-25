@@ -1,10 +1,8 @@
-package OrangeCorps.LBridge.Entity;
+package OrangeCorps.LBridge.Domain.User;
 
-import OrangeCorps.LBridge.DTO.UserDTO;
+import OrangeCorps.LBridge.Domain.User.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -12,8 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name="User") // 미 사용시 클래스이름 == 테이블이름
@@ -24,10 +20,10 @@ import lombok.Setter;
 public class User {
     @Id
     @Column(length=128)
-    private String userId;
+    private String uuid;
 
     @Column(length=128)
-    private String user_name;
+    private String name;
 
     @Column(length=128)
     private String country;
@@ -42,8 +38,8 @@ public class User {
     private String coupleId;
 
     public User(UserDTO userDTO){
-        userId = userDTO.getUserId();
-        user_name = userDTO.getUser_name();
+        uuid = userDTO.getUuid();
+        name = userDTO.getName();
         country = userDTO.getCountry();
         tel = userDTO.getTel();
         birth = userDTO.getBirth();
