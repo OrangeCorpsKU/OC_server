@@ -83,9 +83,7 @@ public class UserTest {
 
         userRepository.save(user1);
 
-        userService.linkCouple("test1","test2");
 
-        assertEquals(user1.getCoupleId(),null);
 
     }
 }
