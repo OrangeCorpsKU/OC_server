@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import OrangeCorps.LBridge.Domain.Couple.CoupleRequestDTO;
 import OrangeCorps.LBridge.Domain.User.UserDTO;
 import OrangeCorps.LBridge.Domain.User.User;
 import OrangeCorps.LBridge.Domain.User.UserRepository;
+import OrangeCorps.LBridge.Service.CoupleService.CoupleRegistService;
 import OrangeCorps.LBridge.Service.UserService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +25,9 @@ public class UserTest {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CoupleRegistService coupleRegistService;
 
     @Test
     @DisplayName("user가 정상적으로 등록되는지 테스트")
@@ -67,7 +72,9 @@ public class UserTest {
         userRepository.save(user1);
         userRepository.save(user2);
 
-        userService.linkCouple("test1","test2");
+        CoupleRequestDTO coupleRequestDTO = new CoupleRequestDTO("test1","test2");
+
+        coupleRegistService.registCouple(coupleRequestDTO);
 
 
 
@@ -83,7 +90,43 @@ public class UserTest {
 
         userRepository.save(user1);
 
+        CoupleRequestDTO coupleRequestDTO = new CoupleRequestDTO("test1","test2");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            coupleRegistService.linkCouple(coupleRequestDTO);
+        });
 
 
     }
+
+    @Test
+    @DisplayName("내 coupleId 반환 테스트")
+    void testCoupleExist(){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUuid("test1");
+        User user1 = new User(userDTO);
+        userDTO.setUuid("test2");
+        User user2 = new User(userDTO);
+        userDTO.setUuid("test3");
+        User user3 = new User(userDTO);
+
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        CoupleRequestDTO coupleRequestDTO = new CoupleRequestDTO("test1","test2");
+
+        coupleRegistService.registCouple(coupleRequestDTO);
+
+        System.out.println(user1.getUuid());
+        System.out.println(user1.getCoupleId());
+        assertEquals(userService.getCoupleIdByUuid("test1"),user2.getUuid());
+        assertEquals(userService.coupleExist("test1"),true);
+        assertEquals(userService.coupleExist("test3"),false);
+    }
+
+
+
+
 }
