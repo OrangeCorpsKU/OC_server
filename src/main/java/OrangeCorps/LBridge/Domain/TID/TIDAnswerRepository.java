@@ -2,6 +2,7 @@ package OrangeCorps.LBridge.Domain.TID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -9,6 +10,5 @@ import java.util.List;
 @Repository
 public interface TIDAnswerRepository extends JpaRepository<TIDAnswer, Long> {
 
-    // all 추가?
-    TIDAnswer findTIDAnswerByQuestionIdAndUserId(Long questionId, String userId);
+    Optional<TIDAnswer> findByQuestionIdAndUserId(Long questionId, String userId);
 }

@@ -14,7 +14,7 @@ public interface TIDQuestionRepository extends JpaRepository<TIDQuestion, Long> 
     Optional<TIDQuestion> findByQuestionId(Long questionId);
 
     // 랜덤으로 하나의 TIDQuestion 객체를 가져오는 쿼리
-    @Query(value = "SELECT * FROM tid_question ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM TIDQuestion ORDER BY RAND() LIMIT 1", nativeQuery = true)
     TIDQuestion findRandomTIDQuestion();
 
 }

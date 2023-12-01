@@ -44,11 +44,13 @@ public class TIDService { // 필요한 함수들 구현
     }
 
     @Transactional
-    public boolean coupleAnswerExist(Long questionId, String userId) { // 질문에 대한 커플 응답 존재여부 확인
+    public boolean coupleAnswerExist(Long questionId, String userId) { // 질문에 대한 커플 응답 존재여부 확
         Optional<User> optionalUser = userRepository.findByUuid(userId);
         User user = optionalUser.get();
         String coupleId = user.getCoupleId();
-        TIDAnswer tidAnswer = tidAnswerRepository.findTIDAnswerByQuestionIdAndUserId(questionId, coupleId);
+
+        Optional<TIDAnswer> optionalTIDAnswer = tidAnswerRepository.findByQuestionIdAndUserId(questionId, coupleId);
+        TIDAnswer tidAnswer = optionalTIDAnswer.get();
         return Objects.nonNull(tidAnswer);
     }
 
@@ -59,8 +61,11 @@ public class TIDService { // 필요한 함수들 구현
         User user = optionalUser.get();
         String coupleId = user.getCoupleId();
 
-        // 상대(coupleId)가 답변을 했는지는 확인하기
-
+        // 불러오는거 추가하기
+        Optional<TIDAnswer> optionalTIDAnswer = tidAnswerRepository.findByQuestionIdAndUserId(questionId, coupleId);
+        TIDAnswer tidAnswer = optionalTIDAnswer.get();
+        String userAnswer = tidAnswer.getAnswer();
+        return userAnswer;
     }
 
     @Transactional

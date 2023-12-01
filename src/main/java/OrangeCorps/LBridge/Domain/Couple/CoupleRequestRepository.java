@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface CoupleRequestRepository extends JpaRepository<CoupleRequest,String> {
     Optional<CoupleRequest> findByCoupleId(String coupleId);
 
-
 }
