@@ -5,6 +5,7 @@ import OrangeCorps.LBridge.Domain.TID.TIDAnswerRepository;
 import OrangeCorps.LBridge.Domain.TID.TIDQuestion;
 import OrangeCorps.LBridge.Domain.TID.TIDQuestionRepository;
 import OrangeCorps.LBridge.Service.TID.TIDService;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @Slf4j
 @SpringBootTest
+@Transactional
 public class TIDTest {
     @Autowired
     private TIDAnswerRepository tidAnswerRepository;
@@ -31,11 +33,6 @@ public class TIDTest {
 
     @Autowired TIDService tidService;
 
-    @AfterEach
-    public void afterEach() { // 모든 다른 테스트 메소드가 끝날때마다 실행되는것
-        tidAnswerRepository.deleteAll(); // 한 메소드의 테스트가 끝날때마다 clear한다
-        tidQuestionRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("TID 질문 생성되는지 테스트")
