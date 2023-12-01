@@ -28,8 +28,6 @@ public class Config {
     public final static String MY_REQUEST_DECLINED = "Request Declined";
 
 
-
-
     //static
 
     public final static Integer PAIR_OF_COUPLE = 2;
@@ -41,5 +39,8 @@ public class Config {
     public final static Integer NEWS_START_INDEX = 0;
 
     public final static Integer NEWS_END_INDEX =5;
+
+
+
 
 }

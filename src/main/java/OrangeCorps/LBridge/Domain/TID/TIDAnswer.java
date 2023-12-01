@@ -1,39 +1,47 @@
 package OrangeCorps.LBridge.Domain.TID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
-@Getter
-@Setter
 public class TIDAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long answerId;
     private Long questionId;
     private String answer;
-    private LocalDateTime timestamp;
     private String userId;
     private String coupleId;
-    private String combinedKey;
 
-    public TIDAnswer() {
-        this.timestamp = LocalDateTime.now();
-        initCombinedKey();
+
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    private void initCombinedKey() {
-        String year = String.valueOf(timestamp.getYear());
-        String month = String.format("%02d", timestamp.getMonthValue());
-        String day = String.format("%02d", timestamp.getDayOfMonth());
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
 
-        this.combinedKey = year + "_" + month + "_" + day + "_" + userId + "_" + coupleId;
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCoupleId() {
+        return coupleId;
+    }
+
+    public void setCoupleId(String coupleId) {
+        this.coupleId = coupleId;
     }
 }

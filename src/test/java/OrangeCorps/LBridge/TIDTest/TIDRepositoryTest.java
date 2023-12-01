@@ -1,7 +1,8 @@
-package OrangeCorps.LBridge;
+package OrangeCorps.LBridge.TIDTest;
 
-import OrangeCorps.LBridge.Repository.TIDAnswerRepository;
-import OrangeCorps.LBridge.Repository.TIDQuestionRepository;
+import OrangeCorps.LBridge.Domain.TID.TIDAnswerRepository;
+import OrangeCorps.LBridge.Domain.TID.TIDQuestion;
+import OrangeCorps.LBridge.Domain.TID.TIDQuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @Slf4j
 @SpringBootTest
-public class TIDTest {
+public class TIDRepositoryTest {
     @Autowired
     private TIDAnswerRepository tidAnswerRepository;
 
@@ -21,6 +22,8 @@ public class TIDTest {
     @Test
     @DisplayName("TID 질문 제대로 불러와지는지 테스트")
     void testGetTIDQuestions() {
+        TIDQuestion tidQuestion = new TIDQuestion();
+        tidQuestion.setQuestion();
 
     }
 
