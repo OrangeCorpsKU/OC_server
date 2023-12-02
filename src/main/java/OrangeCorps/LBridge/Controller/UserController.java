@@ -34,9 +34,9 @@ public class UserController {
         return ResponseEntity.ok("USER " + userID + " INSERT SUCCESSFULLY");
     }
 
-    @GetMapping("/country")
-    public ResponseEntity<String> getUserCountry(@RequestParam String uuid){
-        String country= userService.findCountry(uuid);
-        return ResponseEntity.ok(country);
+    @GetMapping("/myCouple")
+    public ResponseEntity<User> getUserCountry(@RequestParam String uuid){
+        User couple= userService.myCouple(uuid);
+        return ResponseEntity.ok(couple);
     }
 }
