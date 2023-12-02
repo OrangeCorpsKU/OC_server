@@ -1,13 +1,14 @@
 package OrangeCorps.LBridge.Domain.TID;
 
-import OrangeCorps.LBridge.Domain.TID.TIDAnswer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 import java.util.List;
 
+// TIDAnswer entity에 의해 생성된 DB에 접근하는 메소드 사용을 위한 인터페이스.
 @Repository
 public interface TIDAnswerRepository extends JpaRepository<TIDAnswer, Long> {
-    // 응답 datestamp + userid1 + userid2로 combined key로 조회.
-    List<TIDAnswer> findByCombinedKey(String combinedKey);
+
+    Optional<TIDAnswer> findByQuestionIdAndUserId(Long questionId, String userId);
 }
