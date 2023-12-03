@@ -15,7 +15,6 @@ public class LBridgeException {
     public ResponseEntity<String> ExceptionHandler(NullPointerException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
-
     @ExceptionHandler
     public ResponseEntity<String> ExceptionHandler(IllegalArgumentException e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -25,5 +24,4 @@ public class LBridgeException {
     public ResponseEntity<String> ExceptionHandler(NoSuchElementException e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
-
 }

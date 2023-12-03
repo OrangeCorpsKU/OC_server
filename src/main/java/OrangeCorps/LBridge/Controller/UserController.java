@@ -32,7 +32,6 @@ public class UserController {
     public ResponseEntity<String> userRegist(@RequestBody UserDTO userDTO) {
         String userID = userService.saveUser(userDTO);
         return ResponseEntity.ok("USER " + userID + " INSERT SUCCESSFULLY");
-
     }
 
     @GetMapping("/myCouple")
@@ -40,7 +39,4 @@ public class UserController {
         User couple= userService.myCouple(uuid);
         return ResponseEntity.ok(couple);
     }
-
-
-
 }

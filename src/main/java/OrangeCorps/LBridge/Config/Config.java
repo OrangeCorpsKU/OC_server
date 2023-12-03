@@ -31,6 +31,7 @@ public class Config {
     //news
     public final static String NEWS_IMAGE_BASE_URL = "https://static01.nyt.com/";
 
+
     //static
 
     public final static Integer PAIR_OF_COUPLE = 2;
@@ -42,5 +43,8 @@ public class Config {
     public final static Integer NEWS_START_INDEX = 0;
 
     public final static Integer NEWS_END_INDEX =5;
+
+
+
 
 }
