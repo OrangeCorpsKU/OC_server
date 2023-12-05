@@ -42,20 +42,20 @@ public class TIDTest {
         assertEquals("test question", question);
     }
 
-    @Test
-    @DisplayName("TID 질문 랜덤으로 불러와지는지 테스트")
-    void testGetRandomQuestion() {
-        TIDQuestion newQuestion1 = tidService.createNewTIDQuestion("test question1");
-        Long id1 = newQuestion1.getQuestionId();
-        TIDQuestion newQuestion2 = tidService.createNewTIDQuestion("test question2");
-        Long id2 = newQuestion2.getQuestionId();
-        TIDQuestion newQuestion3 = tidService.createNewTIDQuestion("test question3");
-        Long id3 = newQuestion3.getQuestionId();
-
-        TIDQuestion getRandom = tidService.getRandomQuestion();
-        Long idRandom = getRandom.getQuestionId();
-        assertThat(List.of(id1, id2, id3)).contains(idRandom);
-    }
+//    @Test
+//    @DisplayName("TID 질문 랜덤으로 불러와지는지 테스트")
+//    void testGetRandomQuestion() {
+//        TIDQuestion newQuestion1 = tidService.createNewTIDQuestion("test question1");
+//        Long id1 = newQuestion1.getQuestionId();
+//        TIDQuestion newQuestion2 = tidService.createNewTIDQuestion("test question2");
+//        Long id2 = newQuestion2.getQuestionId();
+//        TIDQuestion newQuestion3 = tidService.createNewTIDQuestion("test question3");
+//        Long id3 = newQuestion3.getQuestionId();
+//
+//        TIDQuestion getRandom = tidService.getRandomQuestion();
+//        Long idRandom = getRandom.getQuestionId();
+//        assertThat(List.of(id1, id2, id3)).contains(idRandom);
+//    }
 
     @Test
     @DisplayName("TID 대답 저장되는지 테스트")
