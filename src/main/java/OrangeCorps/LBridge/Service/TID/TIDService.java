@@ -16,6 +16,7 @@ import java.util.*;
 
 @Service
 public class TIDService { // 필요한 함수들 구현
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private TIDAnswerRepository tidAnswerRepository;
